@@ -1,0 +1,78 @@
+<!DOCTYPE html>{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Инфляция в России</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style type="text/css">
+        .sum{
+          background-color: blanchedalmond;
+        }
+     </style>
+  </head>
+
+  <body>
+    {% block content %}
+      <div class="row">
+        <h1 class="col s12">Инфляция в России</h1>
+        <div class="col s12 m8">
+
+            <table>
+              <tbody>
+                <tr>
+                  <th>Год</th>
+                  <th>Янв</th>
+                  <th>Фев</th>
+                  <th>Мар</th>
+                  <th>Апр</th>
+                  <th>Май</th>
+                  <th>Июн</th>
+                  <th>Июл</th>
+                  <th>Авг</th>
+                  <th>Сен</th>
+                  <th>Окт</th>
+                  <th>Ноя</th>
+                  <th>Дек</th>
+                  <th>Суммарно</th>
+                </tr> 
+                   {%for x in static%}
+                  <tr>    
+                    {%for k,v in x.items%}
+                    {% if forloop.first %}
+                    <td>{{v}}</td>
+                    {% endif %}
+                    {% if forloop.last %}
+                    <td style = "background-color:gray;"> {{v}}</td>
+                    {% endif %}
+                    {% if not forloop.last and not forloop.first %}
+                    {% if v == '' %}
+                    <td>-</td>
+                    {% elif v < '0' %}
+                    <td style = "background-color:#00fa00;" >{{v}}</td>
+                    {% elif v > '1' and v < '2' %}
+                    <td style = "background-color:#FFA07A;" >{{v}}</td>
+                    {% elif v > '2' and v < '5' %}
+                    <td style = "background-color:#DC143C;" >{{v}}</td>
+                    {% elif v > '5' %}
+                    <td style = "background-color:#FF0000;" >{{v}}</td>
+                    {%else%}
+                    <td>{{v}}</td>
+                    {% endif %}
+                    {% endif %}
+                    {%endfor%}
+                  </tr>
+                    {%endfor%}  
+              </tbody>
+            </table>
+        </div>
+      </div>
+    {% endblock %}
+
+  </body>
+</html>
