@@ -13,7 +13,10 @@ def inflation_view(request):
         for row in reader:
             tmp = {}
             for k,v in row.items():
-                tmp.setdefault(k,v)
+                value = v
+                if value != '':
+                    value = float(v)
+                tmp.setdefault(k,value)
             list_inflation.append(tmp)
     
     # чтение csv-файла и заполнение контекста
